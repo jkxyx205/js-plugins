@@ -16,11 +16,7 @@ export default function CodeInput(options) {
 
 	// init value
 	if (this.options.value) {
-		if (typeof this.options.value === 'string') {
-			_setValue.call(this, this.options.value)
-		} else {
-			_setValue.call(this, this.options.value.code)	
-		}
+		_setValue.call(this, this.options.value)
 	} else {
 		_resetValue(this)
 	}
@@ -243,13 +239,25 @@ export default function CodeInput(options) {
 		}
 
     function _setValue(value) {
-    	// 筛选
-			list_tr((tr) => {
-				if (tr.dataset['code'] === value) {
-					_setTrValue(this, tr)
-					return true
-				} 
-			})
+    	if (this.options.method === 'local') {
+  			if (typeof this.options.value === 'object') {
+  					value = options.value.code
+				}
+
+    		// 筛选
+				list_tr((tr) => {
+					if (tr.dataset['code'] === value) {
+						_setTrValue(this, tr)
+						return true
+					} 
+				})
+    	} else {
+    		  let dummyTrDOM = {
+          	dataset: {...value}
+          }
+          _setTrValue.call(this, this, dummyTrDOM)
+    	}
+
     }
 
     function list_tr(consumer) {
