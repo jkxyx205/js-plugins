@@ -1,0 +1,13 @@
+{
+  "name": "code-input",
+  "source": "demo/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build && rollup -c"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.12.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "parcel": "^2.12.0"
+  }
+}

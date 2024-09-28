@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>My First Parcel App</title>
+    <link rel="stylesheet" type="text/css" href="http://dao.xhope.top/coreui/css/style.min.css">
+    <link rel="stylesheet" href="styles.css" />
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body>
+    
+    <div class="container">
+        <div class="row">
+          <div class="col-6 mt-4">
+            <div class="select2" id="vendor">
+              <input type="hidden"/>
+              <input class="form-control" />
+              <div class="items">
+                <ul></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="http://dao.xhope.top/coreui/vendors/jquery/js/jquery.min.js"></script>
+    <script type="text/javascript">
+       let select = new select2(document.getElementById('vendor'), {
+        datasource: [
+          {
+            "name": "1",
+            "value": "苏州大学"
+          },
+          {
+            "name": "2",
+            "value": "南京大学"
+          },
+          {
+            "name": "3",
+            "value": "南京总统府"
+          },
+          {
+            "name": "4",
+            "value": "南京玄武湖"
+          },
+        ]
+       })
+    </script>
+  </body>
+</html>

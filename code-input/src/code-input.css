@@ -1,0 +1,56 @@
+.code-input-container {
+	position: relative;
+}
+
+.code-input-container .fa-list {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	color: #5c6873;
+	cursor: pointer;
+}
+
+.code-input-table {
+	position: absolute;
+	z-index: 999;
+	display: none;
+	width: 100%;
+	max-height: 200px; 
+	margin-top: 2px;
+	background: #ffffff;
+	border: 1px solid #c8ced3;
+	overflow: auto;
+}
+
+.code-input-table table {
+	width: 100%;
+	margin-bottom: 0
+}
+
+.code-input-table table tbody tr:hover,
+.code-input-table table tbody tr.active {
+	background: #20A8D8;
+	color: #fff;
+	cursor: pointer;
+}
+
+.code-input-table table th,
+.code-input-table table td {
+	padding: 4px;
+	white-space: nowrap;
+}
+
+.code-input-table table thead.code-input-table-fixed-head {
+	position: sticky;
+	top: 0;
+	background-color: #ffffff;
+}
+
+.code-input-table-empty {
+	display: none;
+	padding: 8px;
+	text-align: center;
+}
+
+.code-input-table table thead.code-input-table-fixed-head {
+}
