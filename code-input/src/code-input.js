@@ -144,8 +144,11 @@ export default function CodeInput(options) {
 							hasData = true
 						})
 		    	}
-	    		this.tableContainerDOM.style.display = 'block'
+
 					handlerSearchResult.call(this, hasData)
+
+		    	this.tableContainerDOM.style.top = (e.target.getBoundingClientRect().top + e.target.ownerDocument.defaultView.pageYOffset + 32) + 'px'
+	    		this.tableContainerDOM.style.display = 'block'
 	    	} else if (e.target.value) { // remote
 	    		handlerSearchResult.call(this, false)
 	    		empty(this.tableBodyDOM)
@@ -180,6 +183,7 @@ export default function CodeInput(options) {
 								// handlerSearchResult.call(this, false)
 					    }
 
+							this.tableContainerDOM.style.top = (e.target.getBoundingClientRect().top + e.target.ownerDocument.defaultView.pageYOffset + 32) + 'px'
 					    this.tableContainerDOM.style.display = 'block'
 						})
 		    	} else {
@@ -192,7 +196,7 @@ export default function CodeInput(options) {
 		console.log('input blur...')
 
 		let trs = _getListTrs()
-		if (trs.length !== 1 && this.tableContainerDOM.style.display !== 'none') {
+		if (!this.inputDOM.value || (trs.length !== 1 && this.tableContainerDOM.style.display !== 'none')) {
 			_resetValue(this)
 		}
 
@@ -255,7 +259,7 @@ export default function CodeInput(options) {
     			let dummyTrDOM = document.createElement("tr")
 
           for (let p in value) {
-          	dummyTrDOM.setAttribute('data-' + p, value[p])
+          	dummyTrDOM.setAttribute('data-' + p, value[p] ? value[p] : '')
           }
 
           this.tableBodyDOM.appendChild(dummyTrDOM)
@@ -279,6 +283,8 @@ export default function CodeInput(options) {
     	for(let p in trDOM.dataset) {
     		object.inputDOM.dataset[p] = trDOM.dataset[p]
     	}
+
+    	object.options.afterSetValue && object.options.afterSetValue(object.getValue())
     }
 
     function _resetValue(object) {
@@ -323,6 +329,9 @@ CodeInput.prototype.getValue = function() {
 	}
 }
 
+CodeInput.prototype.valid = function() {
+	return this.inputDOM.value ? !!this.getValue().id : true
+}
 
 // https://www.freecodecamp.org/news/javascript-debounce-example/
 function debounce(func, timeout = 300){
