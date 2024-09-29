@@ -149,7 +149,7 @@ export default function CodeInput(options) {
 	    	} else if (e.target.value) { // remote
 	    		handlerSearchResult.call(this, false)
 	    		empty(this.tableBodyDOM)
-	    		$.get("/code-input/users", { code: e.target.value })
+	    		$.get("/code-input/" + this.options.remoteKey, { code: e.target.value })
 				  .done(res => {
 					    console.log( "Data Loaded data: ",  res)
 					    if (res.data.length > 0) {
@@ -252,13 +252,18 @@ export default function CodeInput(options) {
 					} 
 				})
     	} else {
-    		  let dummyTrDOM = {
-          	dataset: {...value}
+    			let dummyTrDOM = document.createElement("tr")
+
+          for (let p in value) {
+          	dummyTrDOM.setAttribute('data-' + p, value[p])
           }
+
+          this.tableBodyDOM.appendChild(dummyTrDOM)
           _setTrValue.call(this, this, dummyTrDOM)
     	}
-
     }
+
+    CodeInput.prototype.setValue = _setValue
 
     function list_tr(consumer) {
     	let trsDom = tableBodyDOM.getElementsByTagName('tr')
@@ -317,6 +322,7 @@ CodeInput.prototype.getValue = function() {
 		...this.inputDOM.dataset
 	}
 }
+
 
 // https://www.freecodecamp.org/news/javascript-debounce-example/
 function debounce(func, timeout = 300){

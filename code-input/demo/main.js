@@ -25,6 +25,7 @@ let codeInput = new CodeInput({
 		console.log('blur: ', value)
 	},
 	// method: 'remote',
+	// remoteKey: 'users',
 	// reportId: "786015805669142528", // 显示 search help
 	// value: '0003',
 	// value: {
